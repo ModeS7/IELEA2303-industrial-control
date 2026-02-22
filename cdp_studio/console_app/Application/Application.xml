@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Application Name="Oving7App" Model="Application" Description=''>
+  <ApplicationHandle>1</ApplicationHandle>
+  <fs>10</fs>
+  <ClockSync>None</ClockSync>
+  <IsTimeServer>0</IsTimeServer>
+  <OSTimeInterval>120</OSTimeInterval>
+  <Domain>Oving7</Domain>
+
+  <NetworkInterface Name="ETH0" MAC="" IPAddress="127.0.0.2" SubnetMask="255.255.255.255"></NetworkInterface>
+
+  <Subcomponents>
+    <Subcomponent Name="CDP"        Model="CDP"        src="Components\CDP.xml"></Subcomponent>
+    <Subcomponent Model="Sine" Name="Sine" src="Components/Sine.xml"></Subcomponent>
+    <Operator Expression="Input&lt;1 ? 0 : Input&lt;10 ?  1 : 2" Model="Automation.Evaluate&lt;double&gt;" Name="LampControl" Type="double">
+      <Argument CppName="m_output" Description="Default output argument" Input="0" Model="DefaultArgument&lt;double&gt;" Name="Out" Routing="" Type="double" Value="0"></Argument>
+      <Argument CppName="m_input" Description="Default input argument" Input="1" Model="DefaultArgument&lt;double&gt;" Name="Input" Routing="..Sine.Output" Type="double" Value="0"></Argument></Operator>
+  </Subcomponents>
+
+  <Signals>
+    <Signal Name='Process Timer'    Model="CDPSignal&lt;double&gt;" Type='double' Unit='s/s'    Description='Process run time each s.' ></Signal>
+    <Signal Name='Process Period'   Model="CDPSignal&lt;double&gt;" Type='double' Unit='s'      Description='Process interval [s].' ></Signal>
+    <Signal Name="CPULoad"          Model="CDPSignal&lt;double&gt;" Type="double" Unit="0..1"   Description="CPU load [busy/idle, 0..1]."></Signal>
+    <Signal Name="MemUsed"          Model="CDPSignal&lt;double&gt;" Type="double" Unit="KiB"    Description="Memory used [KiB]."></Signal>
+    <Signal Name="MemUsedRelative"  Model="CDPSignal&lt;double&gt;" Type="double" Unit="0..1"   Description="Memory used relative [used/total, 0..1]."></Signal>
+    <Signal Name="MemTotal"         Model="CDPSignal&lt;double&gt;" Type="double" Unit="KiB"    Description="Memory total [KiB]."></Signal>
+    <Signal Name="MemBuffCache"     Model="CDPSignal&lt;double&gt;" Type="double" Unit="KiB"    Description="Memory in buffers and cache [KiB] (only relevant if Linux)."></Signal>
+  </Signals>
+
+  <Alarms>
+    <Alarm Name='Disk Alarm'            Level='Error'   Enabled='1' Trig='1'  Text='No disk-write problem detected.' Description='This alarm is set when something is wrong with the disk or files on the disk.'></Alarm>
+    <Alarm Name="InvalidLicense"        Level="Error" Enabled="1"   Text="Invalid or missing feature license detected."></Alarm>
+    <Alarm Name='Component Suspended'   Level='Warning' Enabled='1' Trig='0'  Text='Component was suspended!' Description='The component was suspended!' ></Alarm>
+    <Alarm Description="Configuration save period timed out. The configuration saving has been forcibly enabled, even though DelayConfigurationSave is true.
+    Consider increasing MaxConfigurationSaveDelay." Level="Error" Name="DelayConfigurationSaveAborted" Text="Configuration file write was re-enabled (DelayConfigurationSave overridden)" Trig="1"></Alarm>
+  </Alarms>
+
+  <Parameters>
+    <Parameter Description="The maximum amount of time that DelayConfigurationSave can block the configuration saving. If DelayConfigurationSave
+    is active for longer than this time, configuration saving will be allowed again, and the DelayConfigurationSaveAborted alarm will trigger." Name="MaxConfigurationSaveDelay" PreviousValue="600" Unit="s" Value="600"></Parameter></Parameters>
+  
+
+</Application>

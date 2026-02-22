@@ -1,0 +1,46 @@
+# Build directories
+build*/
+build-*/
+
+# Qt/qmake generated
+Makefile
+Makefile.Debug
+Makefile.Release
+.qmake.stash
+*.pro.user
+*.pro.user.*
+
+# Compiled objects and binaries
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+
+# Qt MOC generated
+moc_*.cpp
+ui_*.h
+mocinclude.opt
+
+# IDE
+.idea/
+.vscode/
+.qtcreator/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# CODESYS artifacts
+*.SDB
+*.SYM
+*.SYM_XML
+
+# Documentation (large)
+*.pdf
+
+# Misc
+*.bak
+*.tmp
