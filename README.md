@@ -2,6 +2,10 @@
 
 Motor control and signal processing application built with CDP Studio (Kongsberg Digital), featuring both a console-based control backend and a Qt-based GUI for real-time monitoring.
 
+| CDP Studio GUI | CODESYS SFC | Wiring |
+|---|---|---|
+| ![GUI](docs/examples/cdp_studio_gui.png) | ![SFC](docs/examples/codesys_sfc_motor.png) | ![Wiring](docs/examples/wiring_schematic.png) |
+
 ## Course Information
 
 - **Course:** [IELEA2303 - Industrielle styresystemer med prosjekt](https://www.ntnu.edu/studies/courses/IELEA2303)
